@@ -1,6 +1,109 @@
+@import "tailwindcss";
+
+/* Vertical-room breakpoints for the single-frame layout. */
+@custom-variant short (@media (max-height: 640px));
+@custom-variant short-wide (@media (max-height: 620px) and (min-width: 720px));
+
+@theme {
+  --color-primary: #ccff33;
+  --color-primary-dark: #b0e61e;
+  --color-doodle-yellow: #ffe600;
+
+  /* Pastel accent blocks (Meet the Builders styling) */
+  --color-pastel-mint: #b5ead7;
+  --color-pastel-pink: #ffb3c6;
+  --color-pastel-blue: #aed9e0;
+  --color-pastel-lavender: #c3b1e1;
+  --color-badge-yellow: #e7e700;
+  --color-verified: #00c853;
+  --color-role: #4f6600;
+
+  --color-background-light: #fdfcf7;
+  --color-card-light: #ffffff;
+
+  /* Muted surface fills for chips/stat boxes */
+  --color-surface-container-low: #f3f5e1;
+  --color-surface-container: #edf0db;
+  --color-surface-container-high: #e7ead6;
+
+  --font-display: var(--font-fredoka), "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-nunito), "Nunito", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-neobrutal: 5px 5px 0px 0px #000000;
+  --shadow-neobrutal-sm: 3px 3px 0px 0px #000000;
+  --shadow-neobrutal-lg: 8px 8px 0px 0px #000000;
+}
+
+/* 3px border widths (Tailwind ships 0/2/4/8 only) */
+@utility border-3 {
+  border-width: 3px;
+}
+@utility border-t-3 {
+  border-top-width: 3px;
+}
+
+html {
+  /* Smooth in-page jumps for the nav anchors. The page scrolls normally -
+     no scroll-snap (it was trapping the last screen out of reach). */
+  scroll-behavior: smooth;
+}
 html,
 body {
-  height: 100%;
   margin: 0;
-  background: #ffffff;
+  /* Vertical scroll is free; never sideways. */
+  overflow-x: hidden;
+}
+
+/* A landing-page section that's at least one screen tall.
+   - 100vh: universal fallback
+   - 100svh: excludes mobile browser chrome on modern engines
+   - --app-h (from frame-height.tsx) pins it to the exact visible px. */
+.app-frame {
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: var(--app-h, 100svh);
+}
+
+/* The hero locks to exactly one screen. `overflow: clip` hides anything that
+   pokes past that height WITHOUT making it a scroll container - so the mouse
+   wheel scrolls the page through it instead of getting trapped. */
+.frame-fixed {
+  height: var(--app-h, 100svh);
+  overflow: clip;
+}
+
+.pattern-dots {
+  background-image: radial-gradient(#000000 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+/* Subtle graph-paper dot texture (Meet the Builders section background) */
+.dot-grid {
+  background-image: radial-gradient(rgba(24, 29, 12, 0.16) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@layer base {
+  /* Material Symbols helper (font-face comes from the Google Fonts <link>).
+     Lives in @layer base so `hidden` / `block` utilities still win over it.
+     No font-size here so Tailwind text-* utilities keep controlling icon size. */
+  .material-symbols-outlined {
+    font-family: "Material Symbols Outlined";
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+    font-variation-settings:
+      "FILL" 0,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 24;
+  }
 }
