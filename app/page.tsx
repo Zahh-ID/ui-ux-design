@@ -236,37 +236,6 @@ const BUILDERS: Builder[] = [
   },
 ];
 
-const TEAM_STATS = [
-  { label: "Core Devs", value: "14+" },
-  { label: "Open Source", value: "100%" },
-  { label: "Gas Surprises", value: "0" },
-  { label: "Network Uptime", value: "99.9%" },
-];
-
-const STACK = [
-  {
-    icon: "token",
-    badge: "bg-pastel-mint",
-    title: "Smart Contracts",
-    bio: "Highly optimized Solidity contracts with gas golf techniques, custom ERC-721P batch minting, and multi-sig pause guards.",
-    tags: ["EVM", "ERC-721P", "Custom Staking Pool", "Reentrancy Guard"],
-  },
-  {
-    icon: "terminal",
-    badge: "bg-pastel-blue",
-    title: "Client & UI Engine",
-    bio: "Blazing fast static delivery with reactive wallet adapters, zero CSS runtime overhead, and real-time gas calculation simulation.",
-    tags: ["Vite", "TailwindCSS", "Web3Modal", "Ethers.js"],
-  },
-  {
-    icon: "cloud_sync",
-    badge: "bg-pastel-pink",
-    title: "Decentralized Storage & Oracles",
-    bio: "Permanent provenance and verifiable randomness ensure that metadata cannot be tampered with or silently swapped post-mint.",
-    tags: ["IPFS / Filecoin", "Arweave", "Chainlink VRF"],
-  },
-];
-
 function SocialIcon({ s }: { s: Social }) {
   const cls = `flex h-8 w-8 items-center justify-center rounded-lg border-2 border-black bg-background-light text-black transition-colors ${s.hover}`;
   if (s.kind === "github") {
@@ -346,32 +315,6 @@ function BuilderCard({ b }: { b: Builder }) {
   );
 }
 
-/* ── #work - Project Showcase ── */
-const P1_FEATURES = [
-  { icon: "quiz", text: "Auto-graded quizzes with instant feedback & hints" },
-  { icon: "insights", text: "Student progress dashboards & teacher analytics" },
-  { icon: "cast_for_education", text: "Live classroom sessions with a shared whiteboard" },
-];
-const P1_STACK: [string, string][] = [
-  ["Next.js", "bg-pastel-lavender"],
-  ["React", "bg-pastel-blue"],
-  ["TypeScript", "bg-primary"],
-  ["PostgreSQL", "bg-badge-yellow"],
-  ["Tailwind", "bg-pastel-pink"],
-];
-
-const P2_FEATURES = [
-  { icon: "precision_manufacturing", text: "Real-time machine telemetry & OEE monitoring" },
-  { icon: "notifications_active", text: "Predictive maintenance alerts & downtime logs" },
-  { icon: "inventory", text: "Inventory control & role-based shop-floor access" },
-];
-const P2_STACK: [string, string][] = [
-  ["React", "bg-badge-yellow"],
-  ["Node.js", "bg-pastel-mint"],
-  ["WebSocket", "bg-pastel-pink"],
-  ["TimescaleDB", "bg-pastel-blue"],
-  ["Docker", "bg-pastel-lavender"],
-];
 
 function StatBox({ items }: { items: [string, string][] }) {
   return (
@@ -392,26 +335,22 @@ function ProjectContent({
   tag,
   title,
   desc,
-  features,
-  stack,
-  stats,
   primaryLabel,
   primaryIcon,
   primaryBg,
   secondaryLabel,
   secondaryIcon,
+  primaryHref,
 }: {
   tag: string;
   title: string;
   desc: string;
-  features: { icon: string; text: string }[];
-  stack: [string, string][];
-  stats: [string, string][];
   primaryLabel: string;
   primaryIcon: string;
   primaryBg: string;
   secondaryLabel: string;
   secondaryIcon: string;
+  primaryHref?: string;
 }) {
   return (
     <div className="flex-1">
@@ -423,41 +362,20 @@ function ProjectContent({
       </div>
       <h3 className="mt-3 font-display text-2xl font-extrabold text-black sm:text-3xl">{title}</h3>
       <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-600">{desc}</p>
-      <div className="mt-4 flex flex-col gap-2">
-        {features.map((f) => (
-          <div
-            key={f.text}
-            className="flex items-center gap-2 rounded-lg border-2 border-black bg-surface-container-low p-1.5 font-display text-[13px] font-bold"
-          >
-            <span className="material-symbols-outlined shrink-0 text-lg text-role">{f.icon}</span>
-            {f.text}
-          </div>
-        ))}
-      </div>
-      <div className="mt-4 flex flex-wrap items-center gap-1.5">
-        <span className="font-display text-[11px] font-bold text-slate-500">Stack:</span>
-        {stack.map(([label, bg]) => (
-          <span
-            key={label}
-            className={`rounded-full border-2 border-black px-2 py-0.5 font-display text-[11px] font-bold shadow-neobrutal-sm ${bg}`}
-          >
-            {label}
-          </span>
-        ))}
-      </div>
-      <div className="mt-4">
-        <StatBox items={stats} />
-      </div>
       <div className="mt-4 flex flex-wrap gap-3">
         <a
-          href="#"
+          href="https://ui-ux-pendidikan.0xzahh.dev/"
+          target="_blank"
+          rel="noopener noreferrer"
           className={`inline-flex items-center gap-1.5 rounded-full border-3 border-black px-5 py-2.5 font-display text-sm font-bold shadow-neobrutal transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neobrutal-lg active:translate-x-0.5 active:translate-y-0.5 ${primaryBg}`}
         >
           {primaryLabel}
           <span className="material-symbols-outlined text-base">{primaryIcon}</span>
         </a>
         <a
-          href="#"
+          href="https://ui-ux-industri.0xzahh.dev/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 rounded-full border-3 border-black bg-card-light px-4 py-2.5 font-display text-sm font-bold shadow-neobrutal transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neobrutal-lg active:translate-x-0.5 active:translate-y-0.5"
         >
           <span className="material-symbols-outlined text-base">{secondaryIcon}</span>
@@ -505,13 +423,6 @@ function WorkSection() {
                 tag="#PROJECT_01 · Education Platform"
                 title="Interactive Education Web App"
                 desc="A friendly learning platform for students and teachers: interactive lessons, auto-graded quizzes, progress tracking, live classroom sessions, and offline-first content that works on any device."
-                features={P1_FEATURES}
-                stack={P1_STACK}
-                stats={[
-                  ["Active Students", "4,500+"],
-                  ["Courses", "120+"],
-                  ["Status", "COMING SOON"],
-                ]}
                 primaryLabel="Launch App"
                 primaryIcon="north_east"
                 primaryBg="bg-primary"
@@ -527,7 +438,7 @@ function WorkSection() {
                       <span className="h-3 w-3 rounded-full border-[1.5px] border-black bg-verified" />
                     </div>
                     <span className="font-display text-[10px] font-bold uppercase text-black">
-                      edu-app.io/dashboard
+                      https://ui-ux-pendidikan.0xzahh.dev
                     </span>
                     <span className="material-symbols-outlined text-sm text-black">tab</span>
                   </div>
@@ -579,13 +490,6 @@ function WorkSection() {
                 tag="#PROJECT_02 · Industrial Operations"
                 title="Industrial Operations Web App"
                 desc="A rugged operations console for factories and warehouses: real-time machine telemetry, predictive maintenance alerts, shift scheduling, inventory control, and role-based access for the shop floor."
-                features={P2_FEATURES}
-                stack={P2_STACK}
-                stats={[
-                  ["Uptime", "99.9%"],
-                  ["Sites Live", "12"],
-                  ["Devices", "3,400+"],
-                ]}
                 primaryLabel="Read Case Study"
                 primaryIcon="menu_book"
                 primaryBg="bg-badge-yellow"
@@ -639,19 +543,6 @@ function AboutSection() {
             <p className="max-w-2xl text-sm font-semibold leading-relaxed text-slate-600 sm:text-base">
               The humans translating comic book dreams into robust design, handcrafted, and pixel-precise interactive apps.
             </p>
-            <div className="grid w-full grid-cols-2 gap-3 pt-2 sm:grid-cols-4">
-              {TEAM_STATS.map((s) => (
-                <div
-                  key={s.label}
-                  className="flex flex-col gap-1 rounded-xl border-3 border-black bg-card-light p-4 shadow-neobrutal-sm"
-                >
-                  <span className="font-display text-[11px] font-bold uppercase tracking-wide text-slate-600">
-                    {s.label}
-                  </span>
-                  <span className="font-display text-2xl font-extrabold text-black">{s.value}</span>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* 2 - Team grid */}
